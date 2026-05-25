@@ -18,13 +18,6 @@
   flex: 1;
 }
 
-.initialNavList {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 15px;
-  list-style: none; 
-}
-
 .headerWrapper .saldo {
   display: flex;
   flex-direction: column;
@@ -103,11 +96,26 @@
   border-color: var(--accent-border);
 }
 
-.Initial-nav-list{
+.Initial-nav-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr); 
   gap: 15px;
-  list-style: none; 
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Initial-nav-list a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.Initial-nav-list a:hover,
+.Initial-nav-list a:visited,
+.Initial-nav-list a:active,
+.Initial-nav-list a:focus {
+  color: inherit;
+  text-decoration: none;
 }
 
 @media (max-width: 1024px) {

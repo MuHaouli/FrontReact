@@ -1,9 +1,6 @@
 function HeaderPersonalizado(){
     return (
         <header>
-            <div>
-                <img src='./bet.png' alt="Logo" />
-            </div>
 
             <div>
                 <ul>

@@ -3,7 +3,7 @@ function HeaderPersonalizado(){
         <header>
 
             <div>
-                <ul>
+                <ul className="Initial-nav-list">
                     <li>Início</li>
                     <li>Sobre</li>
                     <li>Contato</li>

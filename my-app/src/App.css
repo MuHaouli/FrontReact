@@ -18,6 +18,13 @@
   flex: 1;
 }
 
+.initialNavList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 15px;
+  list-style: none; 
+}
+
 .headerWrapper .saldo {
   display: flex;
   flex-direction: column;
@@ -94,6 +101,13 @@
   background: var(--accent-bg);
   color: var(--accent);
   border-color: var(--accent-border);
+}
+
+.Initial-nav-list{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 15px;
+  list-style: none; 
 }
 
 @media (max-width: 1024px) {

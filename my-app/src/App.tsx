@@ -90,6 +90,7 @@ import HeaderPersonalizado from './components/headerPersonalizado'
 import MaoJogador from './components/maoJogador'
 import PainelAcoes from './components/painelAcoes'
 import Placar from './components/placar'
+import MaoDealer from './components/maoDealer'
 
 function App() {
   const [pontosJogador, setPontosJogador] = useState(17)
@@ -112,6 +113,7 @@ function App() {
 
       <Placar maoJogador={pontosJogador} maoDealer={15} />
       <MaoJogador />
+      <MaoDealer />
 
       <section className="bloco-demo">
         <h3>Controles</h3>

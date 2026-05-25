@@ -5,6 +5,7 @@ import Footer from './components/footer'
 import Saldo from './components/saldo'
 import './App.css'
 import './index.css'
+import blackjackImage from './assets/blackjack.png'
 
 type Game = {
   title: string
@@ -15,22 +16,22 @@ type Game = {
 
 const games: Game[] = [
   {
-    title: 'Caça-Palavras de Português',
-    description: 'Leia as palavras e encontre os termos escondidos na grade.',
-    imageUrl: '',
-    gameUrl: '/jogos/caca-palavras',
+    title: 'BlackJack',
+    description: 'Jogue BlackJack e teste sua sorte!',
+    imageUrl: blackjackImage,
+    gameUrl: '/jogos/blackjack',
   },
   {
-    title: 'Matemática Divertida',
-    description: 'Resolva desafios de somas e multiplicações em tempo real.',
+    title: 'A ser desenvolvido',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     imageUrl: '',
-    gameUrl: '/jogos/matematica',
+    gameUrl: '/jogos/',
   },
   {
-    title: 'Quiz de Ciências',
-    description: 'Teste seus conhecimentos com perguntas educativas.',
+    title: 'A ser desenvolvido',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     imageUrl: '',
-    gameUrl: '/jogos/quiz-ciencias',
+    gameUrl: '/jogos/',
   },
 ]
 

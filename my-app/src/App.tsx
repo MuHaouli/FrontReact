@@ -132,7 +132,6 @@ function App() {
 
       <section className="bloco-componentes">
         <h3>Componentes basicos extras</h3>
-        <Carta />
         <PainelAcoes />
       </section>
     </main>

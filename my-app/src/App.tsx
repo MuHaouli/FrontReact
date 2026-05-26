@@ -1,4 +1,4 @@
-/* import HeaderPersonalizado from './components/headerPersonalizado'
+import HeaderPersonalizado from './components/headerPersonalizado'
 import GameHolder from './components/gameHolder'
 import SideBar from './components/sideBar'
 import Footer from './components/footer'
@@ -81,8 +81,9 @@ function App() {
   )
 }
 
-export default App*/
+export default App
 
+/*
 import { useState } from 'react'
 import './App.css'
 import Carta from './components/carta'
@@ -140,4 +141,4 @@ function App() {
   )
 }
 
-export default App
+export default App*/

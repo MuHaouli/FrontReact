@@ -1,5 +1,5 @@
 function MaoDealer() {
-  const cartas = ['AD', '10C']
+  const cartas = ['A◆', '10♣']
 
   return (
     <section className="mao-dealer">

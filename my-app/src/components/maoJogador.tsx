@@ -1,5 +1,5 @@
 function MaoJogador() {
-  const cartas = ['AS', '10H']
+  const cartas = ['A♠', '10♥']
 
   return (
     <section className="mao-jogador">

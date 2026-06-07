@@ -4,9 +4,9 @@ function HeaderPersonalizado(){
 
             <div>
                 <ul className="Initial-nav-list">
-                    <li><a href="">Início</a></li>
-                    <li><a href="#about">Sobre</a></li>
-                    <li><a href="#contact">Contato</a></li>
+                    <li><a href="/">Início</a></li>
+                    <li><a href="/sobre">Sobre</a></li>
+                    <li><a href="/contato">Contato</a></li>
                 </ul>
             </div>
         </header>

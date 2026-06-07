@@ -4,6 +4,12 @@
   min-height: 100svh;
 }
 
+.app-aula{
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
 .headerWrapper {
   display: flex;
   align-items: center;
@@ -143,21 +149,21 @@
   justify-content: center;
   text-align: center;
   padding: 42px 24px;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   border-radius: 24px;
   background: rgba(170, 59, 255, 0.05);
 }
 
 .appHero h1 {
-  margin: 16px 0 12px;
+  margin: 16px 1.5rem 12px;
   font-size: clamp(2.4rem, 3vw, 4rem);
 }
 
 .appHero p {
   max-width: 720px;
-  margin: 0 auto;
+  margin: 5px auto;
   color: var(--text);
-  line-height: 1.75;
+  line-height: 3.25;
 }
 
 .heroBadge {
@@ -325,6 +331,351 @@ footer {
 
   .copyRightFooter {
     text-align: center;
+  }
+}
+
+/* Blackjack Page Styles */
+.app-aula .headerWrapper {
+  background: linear-gradient(135deg, rgba(170, 59, 255, 0.1) 0%, rgba(170, 59, 255, 0.05) 100%);
+}
+
+.app-aula {
+  background: linear-gradient(180deg, #f8f7fc 0%, #ffffff 100%);
+}
+
+.bloco-demo,
+.bloco-componentes {
+  margin: 0 24px 24px;
+  padding: 28px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bloco-demo h3,
+.bloco-componentes h3 {
+  margin: 0 0 16px;
+  font-size: 1.4rem;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bloco-demo h3::before,
+.bloco-componentes h3::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.bloco-demo p {
+  margin: 12px 0;
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.bloco-demo button,
+.bloco-componentes button {
+  padding: 12px 24px;
+  margin: 8px 8px 8px 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: linear-gradient(135deg, var(--accent) 0%, rgba(170, 59, 255, 0.8) 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(170, 59, 255, 0.3);
+}
+
+.bloco-demo button:hover,
+.bloco-componentes button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(170, 59, 255, 0.4);
+  background: linear-gradient(135deg, rgba(170, 59, 255, 0.9) 0%, rgba(170, 59, 255, 0.7) 100%);
+}
+
+.bloco-demo button:active,
+.bloco-componentes button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(170, 59, 255, 0.3);
+}
+
+.bloco-componentes {
+  margin-bottom: 48px;
+}
+
+.bloco-componentes {
+  display: grid;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .bloco-demo,
+  .bloco-componentes {
+    margin: 0 16px 20px;
+    padding: 20px;
+  }
+
+  .bloco-demo button,
+  .bloco-componentes button {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    margin-right: 6px;
+  }
+}
+
+@media (max-width: 680px) {
+  .bloco-demo,
+  .bloco-componentes {
+    margin: 0 12px 16px;
+    padding: 16px;
+  }
+
+  .bloco-demo button,
+  .bloco-componentes button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+  }
+
+  .app-aula {
+    padding-bottom: 20px;
+  }
+}
+
+/* Blackjack Page Sections */
+.blackjack-board {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+  padding: 32px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(170, 59, 255, 0.08) 0%, rgba(170, 59, 255, 0.02) 100%);
+  box-shadow: 0 4px 16px rgba(170, 59, 255, 0.1);
+  gap: 24px;
+  animation: slideUp 0.3s ease-out;
+}
+
+.blackjack-controls-container {
+  margin-top: 16px;
+}
+
+.blackjack-components-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.blackjack-component-card {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f8f7fc;
+}
+
+.blackjack-component-card h4 {
+  margin: 0 0 12px 0;
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .blackjack-board {
+    margin: 16px;
+    padding: 24px;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 680px) {
+  .blackjack-board {
+    margin: 12px;
+    padding: 16px;
+    gap: 16px;
+  }
+}
+
+/* Placar Styles */
+.placar-mesa {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.placar-pontuacao {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.placar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(170, 59, 255, 0.08) 0%, rgba(170, 59, 255, 0.02) 100%);
+  transition: all 0.2s ease;
+}
+
+.placar-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(170, 59, 255, 0.15);
+}
+
+.placar-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.placar-valor {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.placar-maos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .placar-pontuacao {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .placar-maos {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .placar-pontuacao {
+    grid-template-columns: 1fr;
+  }
+
+  .placar-maos {
+    grid-template-columns: 1fr;
+  }
+
+  .placar-valor {
+    font-size: 2rem;
+  }
+}
+
+/* Mão do Jogador e Dealer Styles */
+.mao-jogador,
+.mao-dealer {
+  padding: 20px;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f8f7fc 0%, #ffffff 100%);
+  transition: all 0.2s ease;
+}
+
+.mao-jogador:hover,
+.mao-dealer:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(170, 59, 255, 0.12);
+}
+
+.mao-jogador h3,
+.mao-dealer h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.2rem;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mao-jogador h3::before {
+  content: '👤';
+  font-size: 1.3rem;
+}
+
+.mao-dealer h3::before {
+  content: '🎰';
+  font-size: 1.3rem;
+}
+
+.linha-cartas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 12px;
+}
+
+.linha-cartas .carta {
+  padding: 16px;
+  background: linear-gradient(135deg, var(--accent) 0%, rgba(170, 59, 255, 0.8) 100%);
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  box-shadow: 0 4px 12px rgba(170, 59, 255, 0.3);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.linha-cartas .carta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(170, 59, 255, 0.4);
+}
+
+@media (max-width: 1024px) {
+  .mao-jogador,
+  .mao-dealer {
+    padding: 16px;
+  }
+
+  .linha-cartas .carta {
+    min-height: 90px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .linha-cartas {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  }
+
+  .linha-cartas .carta {
+    min-height: 80px;
+    font-size: 0.9rem;
+    padding: 12px;
   }
 }
 

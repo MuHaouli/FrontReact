@@ -3,7 +3,6 @@ import '../App.css'
 import '../index.css'
 import Carta from '../components/carta'
 import HeaderPersonalizado from '../components/headerPersonalizado'
-import PainelAcoes from '../components/painelAcoes'
 import Placar from '../components/placar'
 import Saldo from '../components/saldo'
 
@@ -55,10 +54,6 @@ function Blackjack() {
           <div className="blackjack-component-card">
             <h4>Carta de Exemplo</h4>
             <Carta />
-          </div>
-          <div className="blackjack-component-card">
-            <h4>Painel de Ações</h4>
-            <PainelAcoes />
           </div>
         </div>
       </section>

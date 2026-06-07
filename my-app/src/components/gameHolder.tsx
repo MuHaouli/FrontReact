@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 type GameHolderProps = {
   title: string
   description?: string
@@ -13,7 +15,7 @@ function GameHolder({
 }: GameHolderProps) {
   return (
     <article className="gameCard">
-      <a href={gameUrl} className="gameCardLink">
+      <Link to={gameUrl} className="gameCardLink">
         <div className="gameCardImage">
           {imageUrl ? (
             <img src={imageUrl} alt={title} />
@@ -26,7 +28,7 @@ function GameHolder({
           <p>{description}</p>
           <span className="">Ver jogo</span>
         </div>
-      </a>
+      </Link>
     </article>
   )
 }

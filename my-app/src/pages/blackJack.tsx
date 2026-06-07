@@ -48,15 +48,6 @@ function Blackjack() {
         </div>
       </section>
 
-      <section className="bloco-componentes">
-        <h3>Componentes basicos extras</h3>
-        <div className="blackjack-components-grid">
-          <div className="blackjack-component-card">
-            <h4>Carta de Exemplo</h4>
-            <Carta />
-          </div>
-        </div>
-      </section>
     </main>
   )
 }

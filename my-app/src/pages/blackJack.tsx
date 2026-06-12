@@ -12,15 +12,61 @@ import type { GameState } from '../services/api'
 function Blackjack() {
   const [game, setGame] = useState<GameState | null>(null)
   const [playerName, setPlayerName] = useState('Jogador')
+  const [balance, setBalance] = useState(1500)
+  const [depositAmount, setDepositAmount] = useState(0)
+  const [betAmount, setBetAmount] = useState(100)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  function handleDeposit() {
+    if (depositAmount <= 0) {
+      setError('Digite um valor válido para adicionar.')
+      return
+    }
+    setBalance((current) => current + depositAmount)
+    setDepositAmount(0)
+    setError('')
+  }
+
+  function reconcileBalance(gameState: GameState) {
+    if (gameState.balance != null) {
+      setBalance(gameState.balance)
+      return
+    }
+
+    if (!gameState.finished || !gameState.result) {
+      return
+    }
+
+    if (gameState.result === 'PLAYER_WIN') {
+      setBalance((current) => current + gameState.betAmount * 2)
+    } else if (gameState.result === 'DRAW') {
+      setBalance((current) => current + gameState.betAmount)
+    }
+  }
+
   async function handleStartGame() {
+    if (betAmount <= 0) {
+      setError('Aposta deve ser maior que zero.')
+      return
+    }
+
+    if (betAmount > balance) {
+      setError('Saldo insuficiente para essa aposta.')
+      return
+    }
+
     setError('')
     setLoading(true)
     try {
-      const newGame = await startBlackjackGame(playerName || 'Jogador')
+      const newGame = await startBlackjackGame(playerName || 'Jogador', betAmount)
       setGame(newGame)
+
+      if (newGame.balance != null) {
+        setBalance(newGame.balance)
+      } else {
+        setBalance((current) => current - betAmount)
+      }
     } catch (err) {
       console.error('Falha ao iniciar jogo:', err)
       if (axios.isAxiosError(err)) {
@@ -44,6 +90,7 @@ function Blackjack() {
     try {
       const updatedGame = await hitBlackjackGame(game.gameId)
       setGame(updatedGame)
+      reconcileBalance(updatedGame)
     } catch (err) {
       setError('Erro ao comprar carta. Tente novamente.')
     } finally {
@@ -58,6 +105,7 @@ function Blackjack() {
     try {
       const updatedGame = await standBlackjackGame(game.gameId)
       setGame(updatedGame)
+      reconcileBalance(updatedGame)
     } catch (err) {
       setError('Erro ao encerrar a rodada. Tente novamente.')
     } finally {
@@ -75,7 +123,12 @@ function Blackjack() {
     <main className="app-aula">
       <div className="headerWrapper">
         <HeaderPersonalizado />
-        <Saldo />
+        <Saldo
+          balance={balance}
+          depositAmount={depositAmount}
+          onDeposit={handleDeposit}
+          onDepositChange={setDepositAmount}
+        />
       </div>
 
       <section className="blackjack-board">
@@ -95,6 +148,17 @@ function Blackjack() {
             type="text"
             value={playerName}
             onChange={(event) => setPlayerName(event.target.value)}
+            disabled={!!game}
+          />
+        </label>
+        <label>
+          Valor da aposta:
+          <input
+            type="number"
+            min="1"
+            step="1"
+            value={betAmount}
+            onChange={(event) => setBetAmount(Number(event.target.value))}
             disabled={!!game}
           />
         </label>

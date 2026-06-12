@@ -25,7 +25,7 @@ function Blackjack() {
       console.error('Falha ao iniciar jogo:', err)
       if (axios.isAxiosError(err)) {
         const axiosError = err as AxiosError
-        const backendMessage = axiosError.response?.data?.message || axiosError.response?.statusText
+        const backendMessage = (axiosError.response?.data as { message?: string } | undefined)?.message || axiosError.response?.statusText
         setError(`Não foi possível iniciar o jogo: ${backendMessage ?? axiosError.message}`)
       } else if (err instanceof Error) {
         setError(`Não foi possível iniciar o jogo: ${err.message}`)

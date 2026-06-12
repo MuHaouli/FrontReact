@@ -40,4 +40,9 @@ export async function standBlackjackGame(gameId: string) {
   return response.data;
 }
 
+export async function depositBalance(playerName: string, amount: number) {
+  const response = await api.post<{ balance: number }>(`/api/blackjack/${encodeURIComponent(playerName)}/deposit`, { amount });
+  return response.data;
+}
+
 export default api;

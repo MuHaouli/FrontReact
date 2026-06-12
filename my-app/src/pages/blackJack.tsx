@@ -4,7 +4,8 @@ import '../index.css'
 import HeaderPersonalizado from '../components/headerPersonalizado'
 import Placar from '../components/placar'
 import Saldo from '../components/saldo'
-import { startBlackjackGame, hitBlackjackGame, standBlackjackGame, GameState } from '../services/api'
+import { startBlackjackGame, hitBlackjackGame, standBlackjackGame } from '../services/api'
+import type { GameState } from '../services/api'
 
 function Blackjack() {
   const [game, setGame] = useState<GameState | null>(null)

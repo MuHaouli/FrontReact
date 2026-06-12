@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import axios, { isAxiosError } from 'axios'
+import type { AxiosError } from 'axios'
 import '../App.css'
 import '../index.css'
 import HeaderPersonalizado from '../components/headerPersonalizado'
@@ -20,7 +22,16 @@ function Blackjack() {
       const newGame = await startBlackjackGame(playerName || 'Jogador')
       setGame(newGame)
     } catch (err) {
-      setError('Não foi possível iniciar o jogo. Verifique o backend.')
+      console.error('Falha ao iniciar jogo:', err)
+      if (axios.isAxiosError(err)) {
+        const axiosError = err as AxiosError
+        const backendMessage = axiosError.response?.data?.message || axiosError.response?.statusText
+        setError(`Não foi possível iniciar o jogo: ${backendMessage ?? axiosError.message}`)
+      } else if (err instanceof Error) {
+        setError(`Não foi possível iniciar o jogo: ${err.message}`)
+      } else {
+        setError('Não foi possível iniciar o jogo. Verifique o backend.')
+      }
     } finally {
       setLoading(false)
     }

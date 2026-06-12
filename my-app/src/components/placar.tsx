@@ -2,8 +2,7 @@ import type { PlacarMesaProps } from "../types/components/props.types"
 import MaoJogador from "./maoJogador"
 import MaoDealer from "./maoDealer"
 
-function Placar({maoJogador, maoDealer}:PlacarMesaProps) {
-  
+function Placar({ maoJogador, maoDealer, playerCards, dealerCards }: PlacarMesaProps) {
   return (
     <section className="placar-mesa">
       <div className="placar-pontuacao">
@@ -17,8 +16,8 @@ function Placar({maoJogador, maoDealer}:PlacarMesaProps) {
         </div>
       </div>
       <div className="placar-maos">
-        <MaoJogador />
-        <MaoDealer />
+        <MaoJogador cards={playerCards} />
+        <MaoDealer cards={dealerCards} />
       </div>
     </section>
   )

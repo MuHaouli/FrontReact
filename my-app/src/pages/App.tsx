@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import HeaderPersonalizado from '../components/headerPersonalizado'
 import GameHolder from '../components/gameHolder'
 import SideBar from '../components/sideBar'
@@ -36,11 +37,25 @@ const games: Game[] = [
 ]
 
 function App() {
+  const [balance, setBalance] = useState(1500)
+  const [depositAmount, setDepositAmount] = useState(0)
+
+  function handleDeposit() {
+    if (depositAmount <= 0) return
+    setBalance((current) => current + depositAmount)
+    setDepositAmount(0)
+  }
+
   return (
     <div className="appContainer">
       <div className="headerWrapper">
         <HeaderPersonalizado />
-        <Saldo />
+        <Saldo
+          balance={balance}
+          depositAmount={depositAmount}
+          onDeposit={handleDeposit}
+          onDepositChange={setDepositAmount}
+        />
       </div>
 
       <div className="mainWrapper">

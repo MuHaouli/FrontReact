@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { depositBalance } from '../services/api'
 import HeaderPersonalizado from '../components/headerPersonalizado'
 import GameHolder from '../components/gameHolder'
 import SideBar from '../components/sideBar'
@@ -37,13 +38,26 @@ const games: Game[] = [
 ]
 
 function App() {
-  const [balance, setBalance] = useState(1500)
+  const [balance, setBalance] = useState(() => Number(localStorage.getItem('balance')) || 1500)
   const [depositAmount, setDepositAmount] = useState(0)
 
-  function handleDeposit() {
+  async function handleDeposit() {
     if (depositAmount <= 0) return
-    setBalance((current) => current + depositAmount)
-    setDepositAmount(0)
+    try {
+      const resp = await depositBalance('Player 1', depositAmount)
+      if (resp && typeof resp.balance === 'number') {
+        setBalance(resp.balance)
+        localStorage.setItem('balance', String(resp.balance))
+      } else {
+        setBalance((current) => current + depositAmount)
+        localStorage.setItem('balance', String(balance + depositAmount))
+      }
+    } catch (err) {
+      setBalance((current) => current + depositAmount)
+      localStorage.setItem('balance', String(balance + depositAmount))
+    } finally {
+      setDepositAmount(0)
+    }
   }
 
   return (

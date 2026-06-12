@@ -12,7 +12,7 @@ import type { GameState } from '../services/api'
 function Blackjack() {
   const [game, setGame] = useState<GameState | null>(null)
   const [playerName, setPlayerName] = useState('Jogador')
-  const [balance, setBalance] = useState(1500)
+  const [balance, setBalance] = useState(() => Number(localStorage.getItem('balance')) || 1500)
   const [depositAmount, setDepositAmount] = useState(0)
   const [betAmount, setBetAmount] = useState(100)
   const [loading, setLoading] = useState(false)
@@ -28,10 +28,13 @@ function Blackjack() {
       const resp = await depositBalance(playerName || 'Jogador', depositAmount)
       if (resp && typeof resp.balance === 'number') {
         setBalance(resp.balance)
+        localStorage.setItem('balance', String(resp.balance))
         setDepositAmount(0)
         setError('')
       } else {
-        setBalance((current) => current + depositAmount)
+        const newBal = balance + depositAmount
+        setBalance(newBal)
+        localStorage.setItem('balance', String(newBal))
         setDepositAmount(0)
         setError('')
       }
@@ -80,8 +83,10 @@ function Blackjack() {
 
       if (newGame.balance != null) {
         setBalance(newGame.balance)
+        localStorage.setItem('balance', String(newGame.balance))
       } else {
         setBalance((current) => current - betAmount)
+        localStorage.setItem('balance', String(balance - betAmount))
       }
     } catch (err) {
       console.error('Falha ao iniciar jogo:', err)

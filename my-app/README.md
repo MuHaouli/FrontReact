@@ -71,3 +71,77 @@ export default defineConfig([
   },
 ])
 ```
+
+## Configurar Backend Spring Boot
+
+- **Pré-requisitos**: Java 17+, Maven ou Gradle, Spring Boot (starter web).
+- **Porta**: garanta que o backend rode em `8080` (padrão) ou ajuste `VITE_API_BASE_URL` no `my-app/.env`.
+
+1. Habilitar CORS (configuração global recomendada):
+
+```java
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    registry.addMapping("/**")
+      .allowedOrigins("http://localhost:5173") // ajuste para origem do frontend (Vite)
+      .allowedMethods("GET","POST","PUT","DELETE","OPTIONS")
+      .allowedHeaders("*")
+      .allowCredentials(true);
+  }
+}
+```
+
+2. Exemplo simples de controller:
+
+```java
+@RestController
+@RequestMapping("/api")
+public class HelloController {
+  @GetMapping("/hello")
+  public Map<String,String> hello() {
+    return Collections.singletonMap("msg","Hello from Spring");
+  }
+}
+```
+
+3. `application.properties` (opcional):
+
+```
+server.port=8080
+```
+
+4. Testar localmente:
+
+```bash
+mvn spring-boot:run
+# ou
+./gradlew bootRun
+
+curl http://localhost:8080/api/hello
+```
+
+5. Ajustes no frontend:
+
+- No arquivo `my-app/.env` defina:
+
+```
+VITE_API_BASE_URL=http://localhost:8080
+```
+
+- Use a instância Axios em `my-app/src/services/api.ts` para acessar a API:
+
+```ts
+import api from './services/api';
+api.get('/api/hello').then(r => console.log(r.data));
+```
+
+6. Dicas de produção:
+- Use HTTPS e atualize `VITE_API_BASE_URL` para a URL pública.
+- Habilite CORS apenas para origens necessárias em produção.
+

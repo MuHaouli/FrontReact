@@ -12,3 +12,10 @@ export type PlacarMesaProps = {
 export type MaoProps = {
   cards: string[]
 }
+
+export type SaldoProps = {
+  balance: number
+  depositAmount: number
+  onDeposit: (amount: number) => void
+  onDepositChange: (amount: number) => void
+}

@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import axios, { isAxiosError } from 'axios'
+import axios from 'axios'
 import type { AxiosError } from 'axios'
 import '../App.css'
 import '../index.css'
 import HeaderPersonalizado from '../components/headerPersonalizado'
 import Placar from '../components/placar'
 import Saldo from '../components/saldo'
-import { startBlackjackGame, hitBlackjackGame, standBlackjackGame } from '../services/api'
+import { startBlackjackGame, hitBlackjackGame, standBlackjackGame, depositBalance } from '../services/api'
 import type { GameState } from '../services/api'
 
 function Blackjack() {
@@ -18,14 +18,29 @@ function Blackjack() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  function handleDeposit() {
+  async function handleDeposit() {
     if (depositAmount <= 0) {
       setError('Digite um valor válido para adicionar.')
       return
     }
-    setBalance((current) => current + depositAmount)
-    setDepositAmount(0)
-    setError('')
+    setLoading(true)
+    try {
+      const resp = await depositBalance(playerName || 'Jogador', depositAmount)
+      if (resp && typeof resp.balance === 'number') {
+        setBalance(resp.balance)
+        setDepositAmount(0)
+        setError('')
+      } else {
+        setBalance((current) => current + depositAmount)
+        setDepositAmount(0)
+        setError('')
+      }
+    } catch (err) {
+      console.error('Falha ao depositar:', err)
+      setError('Erro ao depositar. Tente novamente.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   function reconcileBalance(gameState: GameState) {
@@ -56,6 +71,7 @@ function Blackjack() {
       return
     }
 
+    console.log(`Iniciando jogo: Jogador=${playerName}, Aposta=${betAmount}, Saldo Local=${balance}`)
     setError('')
     setLoading(true)
     try {

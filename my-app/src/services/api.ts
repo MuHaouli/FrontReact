@@ -14,12 +14,14 @@ export type GameState = {
   dealerCards: string[];
   playerScore: number;
   dealerScore: number;
+  betAmount: number;
+  balance?: number;
   finished: boolean;
   result?: string;
 };
 
-export async function startBlackjackGame(playerName: string) {
-  const response = await api.post<GameState>('/api/blackjack/start', { playerName });
+export async function startBlackjackGame(playerName: string, betAmount: number) {
+  const response = await api.post<GameState>('/api/blackjack/start', { playerName, betAmount });
   return response.data;
 }
 
